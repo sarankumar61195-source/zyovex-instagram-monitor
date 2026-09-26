@@ -99,6 +99,13 @@ def caption_from_page(page: str) -> str:
 
 def collect_channel(url: str) -> list[dict]:
     page = fetch_html(url)
+    lowered = page.lower()
+    if "challenge_required" in lowered or "challenge page" in lowered:
+        raise RuntimeError("Instagram returned an anti-bot challenge page")
+    if "login" in lowered and "instagram" in lowered and len(page) < 25000:
+        raise RuntimeError("Instagram returned a login/blocked page")
+    if len(page.strip()) < 1000:
+        raise RuntimeError("Instagram returned an empty or incomplete page")
     fallback_caption = caption_from_page(page)
     items: list[dict] = []
     seen: set[str] = set()
@@ -140,6 +147,11 @@ def collect_channel(url: str) -> list[dict]:
             }
         )
 
+    if not items:
+        raise RuntimeError(
+            "No public Reel data was present in the Instagram profile HTML"
+        )
+
     return items
 
 
@@ -163,8 +175,14 @@ def main() -> int:
     for item in collected:
         unique[item["url"].lower()] = item
 
+    if not unique and not errors:
+        errors.append({
+            "code": "NO_REELS_FOUND",
+            "error": "No public Reel data was returned by Instagram",
+        })
+
     output = {
-        "success": bool(unique) or not errors,
+        "success": bool(unique),
         "provider": "GITHUB_PUBLIC_HTML",
         "fetchedAt": now_iso(),
         "items": list(unique.values()),
