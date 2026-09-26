@@ -1,1 +1,13 @@
-{"success":false,"items":[],"errors":[{"error":"No reels.json was generated"}]}
+{
+  "success": false,
+  "provider": "GITHUB_PUBLIC_HTML",
+  "fetchedAt": null,
+  "items": [],
+  "errors": [
+    {
+      "code": "SCRAPER_NOT_READY",
+      "message": "The monitor has not collected public Instagram Reel data yet."
+    }
+  ],
+  "note": "This file is generated automatically by instagram_monitor.py."
+}
