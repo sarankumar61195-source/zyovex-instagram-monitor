@@ -1,0 +1,39 @@
+name: Zyovex Instagram Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run Instagram monitor
+        env:
+          CHANNEL_URLS: >-
+            https://www.instagram.com/thelegalbeef/,
+            https://www.instagram.com/kilgeouss/,
+            https://www.instagram.com/yahoosports/,
+            https://www.instagram.com/wbrcnews/
+        run: python instagram_monitor.py
+
+      - name: Save Reel feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reels.json
+          git diff --cached --quiet || git commit -m "Update Reel feed"
+          git push
