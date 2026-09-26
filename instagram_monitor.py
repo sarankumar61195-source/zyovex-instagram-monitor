@@ -94,3 +94,89 @@ def caption_from_page(page: str) -> str:
         page,
         flags=re.I | re.S,
     )
+    return html.unescape(match.group(1)).strip() if match else ""
+
+
+def collect_channel(url: str) -> list[dict]:
+    page = fetch_html(url)
+    fallback_caption = caption_from_page(page)
+    items: list[dict] = []
+    seen: set[str] = set()
+
+    for record in extract_json_ld(page):
+        record_url = str(record.get("url", ""))
+        if "/reel/" not in record_url and "/p/" not in record_url:
+            continue
+        clean_url = record_url.split("?", 1)[0].rstrip("/") + "/"
+        key = clean_url.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        items.append(
+            {
+                "url": clean_url,
+                "caption": str(record.get("caption", fallback_caption) or ""),
+                "postedAt": record.get("uploadDate") or record.get("datePublished") or "",
+                "ownerUsername": "",
+                "mediaType": "VideoObject" if record.get("video") else "ImageObject",
+                "channelUrl": canonical_channel_url(url),
+                "source": "GITHUB_PUBLIC_HTML",
+            }
+        )
+
+    for reel_url in extract_reel_urls(page):
+        if reel_url.lower() in seen:
+            continue
+        seen.add(reel_url.lower())
+        items.append(
+            {
+                "url": reel_url,
+                "caption": fallback_caption,
+                "postedAt": "",
+                "ownerUsername": "",
+                "mediaType": "Video",
+                "channelUrl": canonical_channel_url(url),
+                "source": "GITHUB_PUBLIC_HTML",
+            }
+        )
+
+    return items
+
+
+def main() -> int:
+    urls = channel_urls()
+    if not urls:
+        print("CHANNEL_URLS is empty; no channels were processed.", file=sys.stderr)
+        return 1
+
+    collected: list[dict] = []
+    errors: list[dict] = []
+    for url in urls:
+        try:
+            collected.extend(collect_channel(url))
+        except (HTTPError, URLError, TimeoutError, ValueError) as error:
+            errors.append({"channelUrl": url, "error": str(error)})
+        except Exception as error:  # defensive boundary for one channel
+            errors.append({"channelUrl": url, "error": str(error)})
+
+    unique: dict[str, dict] = {}
+    for item in collected:
+        unique[item["url"].lower()] = item
+
+    output = {
+        "success": bool(unique) or not errors,
+        "provider": "GITHUB_PUBLIC_HTML",
+        "fetchedAt": now_iso(),
+        "items": list(unique.values()),
+        "errors": errors,
+        "note": "Public HTML only; Instagram may return incomplete data or block requests.",
+    }
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as handle:
+        json.dump(output, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+    print(json.dumps({"items": len(output["items"]), "errors": len(errors)}))
+    return 0 if not errors or unique else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
