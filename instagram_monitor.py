@@ -144,7 +144,7 @@ def collect_channel(url: str) -> list[dict]:
                 "ownerUsername": "",
                 "mediaType": "VideoObject" if record.get("video") else "ImageObject",
                 "channelUrl": canonical_channel_url(url),
-                "source": "GITHUB_PUBLIC_HTML",
+                "source": "SCRAPFLY_PUBLIC_HTML",
             }
         )
 
@@ -160,7 +160,7 @@ def collect_channel(url: str) -> list[dict]:
                 "ownerUsername": "",
                 "mediaType": "Video",
                 "channelUrl": canonical_channel_url(url),
-                "source": "GITHUB_PUBLIC_HTML",
+                "source": "SCRAPFLY_PUBLIC_HTML",
             }
         )
 
@@ -200,7 +200,7 @@ def main() -> int:
 
     output = {
         "success": bool(unique),
-        "provider": "GITHUB_PUBLIC_HTML",
+        "provider": "SCRAPFLY_PUBLIC_HTML",
         "fetchedAt": now_iso(),
         "items": list(unique.values()),
         "errors": errors,
