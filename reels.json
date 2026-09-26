@@ -1,24 +1,24 @@
 {
   "success": false,
   "provider": "GITHUB_PUBLIC_HTML",
-  "fetchedAt": "2026-09-26T19:34:20.425208Z",
+  "fetchedAt": "2026-09-26T19:36:33.920296Z",
   "items": [],
   "errors": [
     {
       "channelUrl": "https://www.instagram.com/thelegalbeef/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/kilgeouss/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/yahoosports/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/wbrcnews/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "No public Reel data was present in the Instagram profile HTML"
     }
   ],
   "note": "Public HTML only; Instagram may return incomplete data or block requests."
