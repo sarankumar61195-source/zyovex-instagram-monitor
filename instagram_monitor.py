@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sys
+from urllib.parse import urlencode
 from datetime import datetime, timezone
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -43,13 +44,29 @@ def canonical_channel_url(value: str) -> str:
 
 
 def fetch_html(url: str) -> str:
+    api_key = os.environ.get("SCRAPFLY_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("SCRAPFLY_API_KEY is not configured")
+
+    query = urlencode({
+        "key": api_key,
+        "url": canonical_channel_url(url),
+        "asp": "true",
+        "render_js": "true",
+    })
     request = Request(
-        canonical_channel_url(url),
-        headers={"User-Agent": USER_AGENT, "Accept-Language": "en-US,en;q=0.8"},
+        "https://api.scrapfly.io/scrape?" + query,
+        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
     )
     with urlopen(request, timeout=30) as response:  # nosec B310 - user-provided public URL
-        body = response.read(8_000_000)
-        return body.decode("utf-8", errors="replace")
+        body = response.read(10_000_000).decode("utf-8", errors="replace")
+
+    payload = json.loads(body)
+    result = payload.get("result") or {}
+    content = result.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise RuntimeError("Scrapfly returned no HTML content")
+    return content
 
 
 def decode_json_script(raw: str) -> object | None:
