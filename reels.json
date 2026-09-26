@@ -1,13 +1,8 @@
 {
-  "success": false,
+  "success": true,
   "provider": "GITHUB_PUBLIC_HTML",
-  "fetchedAt": null,
+  "fetchedAt": "2026-09-26T19:19:37.117411Z",
   "items": [],
-  "errors": [
-    {
-      "code": "SCRAPER_NOT_READY",
-      "message": "The monitor has not collected public Instagram Reel data yet."
-    }
-  ],
-  "note": "This file is generated automatically by instagram_monitor.py."
+  "errors": [],
+  "note": "Public HTML only; Instagram may return incomplete data or block requests."
 }
