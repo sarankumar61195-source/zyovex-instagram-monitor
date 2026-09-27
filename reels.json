@@ -1,12 +1,12 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-09-27T10:49:14.971875Z",
+  "fetchedAt": "2026-09-27T15:36:47.682223Z",
   "items": [],
   "errors": [
     {
       "channelUrl": "https://www.instagram.com/thelegalbeef/",
-      "error": "The read operation timed out"
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/kilgeouss/",
