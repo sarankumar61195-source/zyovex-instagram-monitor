@@ -1,24 +1,24 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-09-27T22:32:03.477629Z",
+  "fetchedAt": "2026-09-28T01:13:40.545247Z",
   "items": [],
   "errors": [
     {
       "channelUrl": "https://www.instagram.com/thelegalbeef/",
-      "error": "No public Reel data was present in the Instagram profile HTML"
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "channelUrl": "https://www.instagram.com/kilgeouss/",
-      "error": "No public Reel data was present in the Instagram profile HTML"
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "channelUrl": "https://www.instagram.com/yahoosports/",
-      "error": "The read operation timed out"
+      "error": "HTTP Error 429: Too Many Requests"
     },
     {
       "channelUrl": "https://www.instagram.com/wbrcnews/",
-      "error": "No public Reel data was present in the Instagram profile HTML"
+      "error": "HTTP Error 429: Too Many Requests"
     }
   ],
   "note": "Public HTML only; Instagram may return incomplete data or block requests."
