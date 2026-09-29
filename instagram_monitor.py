@@ -90,6 +90,7 @@ def extract_json_ld(page: str) -> list[dict]:
 
 
 def extract_reel_urls(page: str) -> list[str]:
+    page = page.replace(r"\/", "/")
     found = re.findall(
         r'https?://(?:www\.)?instagram\.com/(?:reel|p)/[A-Za-z0-9_-]+/?',
         page,
