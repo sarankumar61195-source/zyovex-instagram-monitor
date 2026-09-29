@@ -28,10 +28,6 @@ jobs:
         env:
           SCRAPFLY_API_KEY: ${{ secrets.SCRAPFLY_API_KEY }}
           CHANNEL_URLS: >-
-            https://www.instagram.com/thelegalbeef/,
-            https://www.instagram.com/kilgeouss/,
-            https://www.instagram.com/yahoosports/,
-            https://www.instagram.com/wbrcnews/
             https://www.instagram.com/abcnews/,
             https://www.instagram.com/insideedition/,
             https://www.instagram.com/cnn/
