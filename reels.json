@@ -1,23 +1,11 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-09-29T18:04:38.942166Z",
+  "fetchedAt": "2026-09-29T18:13:20.133411Z",
   "items": [],
   "errors": [
     {
-      "channelUrl": "https://www.instagram.com/thelegalbeef/",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "channelUrl": "https://www.instagram.com/kilgeouss/",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "channelUrl": "https://www.instagram.com/yahoosports/",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "channelUrl": "https://www.instagram.com/wbrcnews/ https://www.instagram.com/abcnews/",
+      "channelUrl": "https://www.instagram.com/abcnews/",
       "error": "HTTP Error 429: Too Many Requests"
     },
     {
