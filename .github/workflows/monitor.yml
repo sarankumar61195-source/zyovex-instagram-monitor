@@ -32,6 +32,9 @@ jobs:
             https://www.instagram.com/kilgeouss/,
             https://www.instagram.com/yahoosports/,
             https://www.instagram.com/wbrcnews/
+            https://www.instagram.com/abcnews/,
+            https://www.instagram.com/insideedition/,
+            https://www.instagram.com/cnn/
         run: python instagram_monitor.py
 
       - name: Ensure Reel feed exists
