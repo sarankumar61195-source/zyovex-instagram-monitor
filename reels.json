@@ -1,7 +1,7 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-09-29T17:54:55.067575Z",
+  "fetchedAt": "2026-09-29T18:04:38.942166Z",
   "items": [],
   "errors": [
     {
@@ -17,7 +17,15 @@
       "error": "HTTP Error 429: Too Many Requests"
     },
     {
-      "channelUrl": "https://www.instagram.com/wbrcnews/",
+      "channelUrl": "https://www.instagram.com/wbrcnews/ https://www.instagram.com/abcnews/",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "channelUrl": "https://www.instagram.com/insideedition/",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "channelUrl": "https://www.instagram.com/cnn/",
       "error": "HTTP Error 429: Too Many Requests"
     }
   ],
