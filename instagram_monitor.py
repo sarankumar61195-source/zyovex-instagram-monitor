@@ -58,8 +58,18 @@ def fetch_html(url: str) -> str:
         "https://api.scrapfly.io/scrape?" + query,
         headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
     )
-    with urlopen(request, timeout=30) as response:  # nosec B310 - user-provided public URL
-        body = response.read(10_000_000).decode("utf-8", errors="replace")
+    try:
+        with urlopen(request, timeout=30) as response:  # nosec B310 - public URL
+            body = response.read(10_000_000).decode("utf-8", errors="replace")
+    except HTTPError as error:
+        if error.code == 429:
+            raise RuntimeError(
+                "Rate limited (HTTP 429). Wait before the next run; "
+                "do not retry repeatedly."
+            ) from error
+        raise RuntimeError(f"Scrapfly HTTP {error.code}: {error.reason}") from error
+    except URLError as error:
+        raise RuntimeError(f"Scrapfly network error: {error.reason}") from error
 
     payload = json.loads(body)
     result = payload.get("result") or {}
@@ -211,7 +221,10 @@ def main() -> int:
         json.dump(output, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
     print(json.dumps({"items": len(output["items"]), "errors": len(errors)}))
-    return 0 if not errors or unique else 1
+    # The feed is still saved when Instagram/Scrapfly temporarily blocks a
+    # request. Keep the GitHub job green so the scheduled monitor continues;
+    # the real result is available in reels.json.success and reels.json.errors.
+    return 0
 
 
 if __name__ == "__main__":
