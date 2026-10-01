@@ -1,20 +1,20 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-10-01T13:25:04.147766Z",
+  "fetchedAt": "2026-10-01T17:45:16.404440Z",
   "items": [],
   "errors": [
     {
       "channelUrl": "https://www.instagram.com/abcnews/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
     },
     {
       "channelUrl": "https://www.instagram.com/insideedition/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
     },
     {
       "channelUrl": "https://www.instagram.com/cnn/",
-      "error": "HTTP Error 429: Too Many Requests"
+      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
     }
   ],
   "note": "Public HTML only; Instagram may return incomplete data or block requests."
