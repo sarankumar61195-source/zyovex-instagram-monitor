@@ -1,20 +1,20 @@
 {
   "success": false,
   "provider": "SCRAPFLY_PUBLIC_HTML",
-  "fetchedAt": "2026-10-26T17:37:19.185863Z",
+  "fetchedAt": "2026-10-26T21:55:28.563739Z",
   "items": [],
   "errors": [
     {
       "channelUrl": "https://www.instagram.com/abcnews/",
-      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/insideedition/",
-      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
+      "error": "No public Reel data was present in the Instagram profile HTML"
     },
     {
       "channelUrl": "https://www.instagram.com/cnn/",
-      "error": "Rate limited (HTTP 429). Wait before the next run; do not retry repeatedly."
+      "error": "No public Reel data was present in the Instagram profile HTML"
     }
   ],
   "note": "Public HTML only; Instagram may return incomplete data or block requests."
